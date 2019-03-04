@@ -13,8 +13,6 @@ public class movement : MonoBehaviour {
 	public float falling_grav_mult;
 	public float raycast_dist;
 
-	public float cam_adjust_time;
-
 	// Static settings
 	public static bool movement_enabled = true;
 	public static int current_scene = 1;
@@ -50,6 +48,8 @@ public class movement : MonoBehaviour {
 
 		base_grav_scale = rb.gravityScale;
 		landing_layer_mask = LayerMask.GetMask(new string[] { "platform" });
+
+		camera_controller.focus = transform;
 	}
 
 	public static void full_init() {
@@ -64,7 +64,6 @@ public class movement : MonoBehaviour {
 		current_scene = SceneManager.GetActiveScene().buildIndex;
 
 		if (!movement_enabled) {
-			camera_track();
 			rb.velocity = Vector3.zero;
 			return;
 		}
@@ -128,20 +127,6 @@ public class movement : MonoBehaviour {
 			transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, 180f, transform.rotation.z));
 		} else if (x_input < 0) {
 			transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.x, 0, transform.rotation.z));
-		}
-
-		// Camera tracking
-		camera_track();
-	}
-
-	// Todo - move this tracking system to the camera itself,
-	// with a public static GameObject "focus" which can be set at different times,
-	// so we can more easily do dynamic camera work
-	private void camera_track() {
-		Transform cam = Camera.main.transform;
-		Vector2 displacement = transform.position - cam.position;
-		if (displacement.magnitude > 0.05f) {
-			Camera.main.transform.Translate(displacement * Time.deltaTime * cam_adjust_time);
 		}
 	}
 
