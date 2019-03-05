@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - platform
-  - 
+  - object
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Foreground
     uniqueID: 2457842701
+    locked: 0
+  - name: object
+    uniqueID: 410759971
     locked: 0
