@@ -50,7 +50,7 @@ public class movement : MonoBehaviour {
 		animator = GetComponent<Animator>();
 
 		base_grav_scale = rb.gravityScale;
-		landing_layer_mask = LayerMask.GetMask(new string[] { "platform" });
+		landing_layer_mask = LayerMask.GetMask(new string[] { "platform", "object" });
 
 		camera_controller.focus = transform;
 	}
@@ -81,8 +81,13 @@ public class movement : MonoBehaviour {
 		//rb.velocity += new Vector2(x_input * x_mult * Time.deltaTime, 0);
 
 		// Jump controls
-		Vector3 feet_pos = new Vector3(transform.position.x, col.bounds.min.y);
-		RaycastHit2D raycast = Physics2D.Raycast(feet_pos, Vector2.down, raycast_dist, landing_layer_mask);
+		//Vector3 feet_pos = new Vector3(transform.position.x, col.bounds.min.y);
+		Vector3 left_foot_pos = new Vector3(col.bounds.min.x, col.bounds.min.y);
+		Vector3 right_foot_pos = new Vector3(col.bounds.max.x, col.bounds.min.y);
+		RaycastHit2D raycast = Physics2D.Raycast(left_foot_pos, Vector2.down, raycast_dist, landing_layer_mask);
+		if (raycast.collider == null) {
+			raycast = Physics2D.Raycast(right_foot_pos, Vector2.down, raycast_dist, landing_layer_mask);
+		}
 
 		if (raycast.collider != null && rb.velocity.y <= 0) {
 			jump_grounded_check = true;
