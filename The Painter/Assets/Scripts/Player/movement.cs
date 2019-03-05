@@ -11,6 +11,7 @@ public class movement : MonoBehaviour {
 
 	public float jump_velo;
 	public float falling_grav_mult;
+	public float ghost_jump_delay;
 	public float raycast_dist;
 
 	// Static settings
@@ -24,6 +25,8 @@ public class movement : MonoBehaviour {
 
 	private float base_grav_scale;
 	private bool jump_held = false;
+	private bool jump_grounded_check = false;
+	private float jump_grounded_delay;
 
 	private int landing_layer_mask;
 
@@ -80,9 +83,18 @@ public class movement : MonoBehaviour {
 		// Jump controls
 		Vector3 feet_pos = new Vector3(transform.position.x, col.bounds.min.y);
 		RaycastHit2D raycast = Physics2D.Raycast(feet_pos, Vector2.down, raycast_dist, landing_layer_mask);
-		bool can_jump = raycast.collider != null && rb.velocity.y <= 0;
+
+		if (raycast.collider != null && rb.velocity.y <= 0) {
+			jump_grounded_check = true;
+			jump_grounded_delay = ghost_jump_delay;
+		} else if (jump_grounded_delay <= 0 || rb.velocity.y > jump_velo * 0.2) {
+			jump_grounded_check = false;
+			jump_grounded_delay = 0;
+		} else {
+			jump_grounded_delay -= Time.deltaTime;
+		}
 		
-		if (can_jump && y_input_raw > 0 && !jump_held) {
+		if (jump_grounded_check && y_input_raw > 0 && !jump_held) {
 			jump();
 		}
 

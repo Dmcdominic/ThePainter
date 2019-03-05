@@ -161,8 +161,8 @@ MonoBehaviour:
   x_mult: 2
   jump_velo: 6
   falling_grav_mult: 2
+  ghost_jump_delay: 0.25
   raycast_dist: 0.1
-  cam_adjust_time: 3
 --- !u!114 &3368291451340344135
 MonoBehaviour:
   m_ObjectHideFlags: 0

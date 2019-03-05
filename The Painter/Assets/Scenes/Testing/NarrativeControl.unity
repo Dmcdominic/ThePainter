@@ -420,11 +420,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b960ec58d793a624682ecb0516582233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 0
-  max_speed: 0
-  start_movement_radius: 0
-  stop_movement_radius: 0
-  cam_adjust_time: 3
+  acceleration: 10
+  max_speed: 6
+  start_movement_radius: 0.5
+  stop_movement_radius: 0.05
+  cam_adjust_speed: 3.5
+  velo_margin_of_error: 0.05
 --- !u!1 &704211044
 GameObject:
   m_ObjectHideFlags: 0
