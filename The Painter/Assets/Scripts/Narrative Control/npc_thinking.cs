@@ -20,7 +20,7 @@ public class npc_thinking : MonoBehaviour {
 	private void OnTriggerExit2D(Collider2D collision) {
 		if (collision.gameObject.CompareTag("Player")) {
 			if (dialogue_container.get_current_speaker() == npc_name) {
-				dialogue_container.update_text("", "", false);
+				dialogue_container.update_text(thoughts, npc_name, false);
 			}
 		}
 
