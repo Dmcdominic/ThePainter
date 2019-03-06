@@ -13,7 +13,8 @@ public class erasable : MonoBehaviour {
 		foreach (GameObject GO in to_erase) {
 			if (GO != null && GO.activeSelf) {
 				GO.SetActive(false);
-			}
+                FindObjectOfType<sound_manager>().playTurpentineSound();
+            }
 		}
 	}
 }

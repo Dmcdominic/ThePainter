@@ -16,6 +16,7 @@ public class paintable : MonoBehaviour {
 		foreach (GameObject GO in to_paint_in) {
 			if (GO != null && !GO.activeSelf) {
 				GO.SetActive(true);
+                FindObjectOfType<sound_manager>().playPaintingSound();
 			}
 		}
 	}
