@@ -82,8 +82,8 @@ public class movement : MonoBehaviour {
 
 		// Jump controls
 		//Vector3 feet_pos = new Vector3(transform.position.x, col.bounds.min.y);
-		Vector3 left_foot_pos = new Vector3(col.bounds.min.x, col.bounds.min.y);
-		Vector3 right_foot_pos = new Vector3(col.bounds.max.x, col.bounds.min.y);
+		Vector3 left_foot_pos = new Vector3(col.bounds.min.x + 0.05f, col.bounds.min.y);
+		Vector3 right_foot_pos = new Vector3(col.bounds.max.x - 0.05f, col.bounds.min.y);
 		RaycastHit2D raycast = Physics2D.Raycast(left_foot_pos, Vector2.down, raycast_dist, landing_layer_mask);
 		if (raycast.collider == null) {
 			raycast = Physics2D.Raycast(right_foot_pos, Vector2.down, raycast_dist, landing_layer_mask);
