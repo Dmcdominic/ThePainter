@@ -67,7 +67,8 @@ public class movement : MonoBehaviour {
 		current_scene = SceneManager.GetActiveScene().buildIndex;
 
 		if (!movement_enabled) {
-			rb.velocity = Vector3.zero;
+			//rb.velocity = Vector3.zero;
+			rb.velocity = new Vector2(0, rb.velocity.y);
 			return;
 		}
 
@@ -147,10 +148,9 @@ public class movement : MonoBehaviour {
 		}
 	}
 
-	public void set_movement_enabled(bool enabled) {
+	public static void set_movement_enabled(bool enabled) {
 		movement_enabled = enabled;
-		// todo - freeze timeScale too? instead of the grav_scale change below?
-		rb.gravityScale = enabled ? base_grav_scale : 0;
+		player_instance.rb.gravityScale = enabled ? player_instance.base_grav_scale : 0;
 	}
 
 	// Jump!

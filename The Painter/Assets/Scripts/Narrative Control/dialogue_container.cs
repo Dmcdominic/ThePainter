@@ -90,4 +90,29 @@ public class dialogue_container : MonoBehaviour {
 		}
 		return Instance.speaker;
 	}
+
+	// =========== Cutscene management ===========
+	public static void prompted_dialogue(string dialogue, string speaker) {
+		// todo - take in a list of cutscene_bits instead
+		update_text(dialogue, speaker, true);
+		movement.set_movement_enabled(false);
+		// todo - wait until dialogue_yield_instruction
+	}
+
+	//public IEnumerator test() {
+	//	yield return new WaitForSeconds(10);
+	//}
+}
+
+// Used to construct a list of dialogue lines and camera movements
+// which make up a single cutscene
+public struct cutscene_bit {
+	public string dialogue;
+	public string speaker;
+	public GameObject cam_focus;
+	public cutscene_bit(string _dialogue, string _speaker, GameObject _cam_focus) {
+		dialogue = _dialogue;
+		speaker = _speaker;
+		cam_focus = _cam_focus;
+	}
 }
