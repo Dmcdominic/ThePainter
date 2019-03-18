@@ -148,9 +148,11 @@ public class movement : MonoBehaviour {
 		}
 	}
 
-	public static void set_movement_enabled(bool enabled) {
+	public static void set_movement_enabled(bool enabled, bool no_gravity = false) {
 		movement_enabled = enabled;
-		player_instance.rb.gravityScale = enabled ? player_instance.base_grav_scale : 0;
+		if (no_gravity) {
+			player_instance.rb.gravityScale = enabled ? player_instance.base_grav_scale : 0;
+		}
 	}
 
 	// Jump!

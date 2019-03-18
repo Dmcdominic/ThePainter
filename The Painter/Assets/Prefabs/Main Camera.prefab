@@ -102,6 +102,7 @@ MonoBehaviour:
   stop_movement_radius: 0.05
   cam_adjust_speed: 3.5
   velo_margin_of_error: 0.05
+  deccel_mult: 2.2
 --- !u!50 &914858801125861760
 Rigidbody2D:
   serializedVersion: 4

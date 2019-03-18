@@ -13,6 +13,7 @@ public class camera_controller : MonoBehaviour {
 
 	public float cam_adjust_speed;
 	public float velo_margin_of_error;
+	public float deccel_mult;
 
 	// Private vars
 	private Camera cam;
@@ -56,7 +57,12 @@ public class camera_controller : MonoBehaviour {
 		Vector2 accel_direction = (target_velo - velo).normalized;
 		// If the velocity is within a certain percentage of the target velocity, no need to adjust
 		if ((target_velo - velo).magnitude > target_velo.magnitude * velo_margin_of_error) {
-			velo += acceleration * Time.deltaTime * accel_direction;
+			// If we are trying to deccelerate or turning sharply, do it faster than normal
+			if (Vector2.Angle(accel_direction, velo) > 60f) {
+				velo += acceleration * deccel_mult * Time.deltaTime * accel_direction;
+			} else {
+				velo += acceleration * Time.deltaTime * accel_direction;
+			}
 		}
 
 		velo = Vector2.ClampMagnitude(velo, max_speed);

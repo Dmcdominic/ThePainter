@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class dialogue_yield_instruction : CustomYieldInstruction {
+public class wait_until_dialogue_ready : CustomYieldInstruction {
 	public override bool keepWaiting {
 		get {
-			//return dialogue_container
-			return !Input.anyKey;
+			return !dialogue_container.fully_displayed;
 		}
 	}
 }
