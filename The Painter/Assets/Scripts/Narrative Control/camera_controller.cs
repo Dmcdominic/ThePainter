@@ -19,8 +19,11 @@ public class camera_controller : MonoBehaviour {
 	private Camera cam;
 	private Vector2 velo;
 
-	// The current object for the camrea to track
+	// The current object for the camera to track
 	public static Transform focus;
+
+	// The target size for the camera
+	public static float target_size;
 
 
 	// Init
@@ -64,6 +67,8 @@ public class camera_controller : MonoBehaviour {
 				velo += acceleration * Time.deltaTime * accel_direction;
 			}
 		}
+
+		// Todo - update camera size based on target_size
 
 		velo = Vector2.ClampMagnitude(velo, max_speed);
 		cam.transform.Translate(velo * Time.deltaTime);

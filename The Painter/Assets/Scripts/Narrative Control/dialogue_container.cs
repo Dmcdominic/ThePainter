@@ -127,6 +127,9 @@ public class dialogue_container : MonoBehaviour {
 			if (bit.cam_focus) {
 				camera_controller.focus = bit.cam_focus.transform;
 			}
+			if (bit.cam_size != 0) {
+				camera_controller.target_size = bit.cam_size;
+			}
 
 			yield return new wait_until_dialogue_ready();
 			waiting_for_input = true;
@@ -147,9 +150,11 @@ public struct cutscene_bit {
 	public string dialogue;
 	public string speaker;
 	public GameObject cam_focus;
-	public cutscene_bit(string _dialogue, string _speaker, GameObject _cam_focus) {
+	public float cam_size;
+	public cutscene_bit(string _dialogue, string _speaker, GameObject _cam_focus, float _cam_size = 0) {
 		dialogue = _dialogue;
 		speaker = _speaker;
 		cam_focus = _cam_focus;
+		cam_size = _cam_size;
 	}
 }
