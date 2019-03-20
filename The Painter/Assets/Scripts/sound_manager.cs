@@ -9,6 +9,7 @@ public class sound_manager : MonoBehaviour
     public AudioSource painting_sound;
     public AudioSource turpentine_sound;
     public AudioSource galleria;
+    public AudioSource putting_out_fire;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +46,11 @@ public class sound_manager : MonoBehaviour
     public void playGalleria()
     {
         galleria.Play();
+    }
+
+    public void playPuttingOutFire()
+    {
+        putting_out_fire.Play();
     }
 
 }
