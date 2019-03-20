@@ -66,15 +66,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 410759971
-  m_SortingLayer: 4
+  m_SortingLayerID: -690864697
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f91224b4b5c1bde45ab6d472f9402187, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3, y: 2.36}
+  m_Size: {x: 9.3, y: 6.9}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -98,7 +98,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 9.3, y: 6.9}
-    newSize: {x: 3, y: 2.36}
+    newSize: {x: 9.3, y: 6.9}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5063163304792996240}
   m_Layer: 0
-  m_Name: erasable_paintable_object (1)
+  m_Name: erasable_paintable_object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,6 +276,21 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3231601787446826268, guid: ae70f548b81409342b552b08d584e020,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953515691619270526, guid: ae70f548b81409342b552b08d584e020,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.145
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953515691619270526, guid: ae70f548b81409342b552b08d584e020,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.136
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae70f548b81409342b552b08d584e020, type: 3}
 --- !u!4 &7681747363406897363 stripped
@@ -405,6 +420,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246757073545759971, guid: d941290687334f14ea24fec61adfdcd1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.591
+      objectReference: {fileID: 0}
+    - target: {fileID: 7246757073545759971, guid: d941290687334f14ea24fec61adfdcd1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.087
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d941290687334f14ea24fec61adfdcd1, type: 3}

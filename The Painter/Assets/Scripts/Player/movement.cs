@@ -67,7 +67,8 @@ public class movement : MonoBehaviour {
 		current_scene = SceneManager.GetActiveScene().buildIndex;
 
 		if (!movement_enabled) {
-			rb.velocity = Vector3.zero;
+			//rb.velocity = Vector3.zero;
+			rb.velocity = new Vector2(0, rb.velocity.y);
 			return;
 		}
 
@@ -82,8 +83,8 @@ public class movement : MonoBehaviour {
 
 		// Jump controls
 		//Vector3 feet_pos = new Vector3(transform.position.x, col.bounds.min.y);
-		Vector3 left_foot_pos = new Vector3(col.bounds.min.x, col.bounds.min.y);
-		Vector3 right_foot_pos = new Vector3(col.bounds.max.x, col.bounds.min.y);
+		Vector3 left_foot_pos = new Vector3(col.bounds.min.x + 0.05f, col.bounds.min.y);
+		Vector3 right_foot_pos = new Vector3(col.bounds.max.x - 0.05f, col.bounds.min.y);
 		RaycastHit2D raycast = Physics2D.Raycast(left_foot_pos, Vector2.down, raycast_dist, landing_layer_mask);
 		if (raycast.collider == null) {
 			raycast = Physics2D.Raycast(right_foot_pos, Vector2.down, raycast_dist, landing_layer_mask);
@@ -147,10 +148,11 @@ public class movement : MonoBehaviour {
 		}
 	}
 
-	public void set_movement_enabled(bool enabled) {
+	public static void set_movement_enabled(bool enabled, bool no_gravity = false) {
 		movement_enabled = enabled;
-		// todo - freeze timeScale too? instead of the grav_scale change below?
-		rb.gravityScale = enabled ? base_grav_scale : 0;
+		if (no_gravity) {
+			player_instance.rb.gravityScale = enabled ? player_instance.base_grav_scale : 0;
+		}
 	}
 
 	// Jump!

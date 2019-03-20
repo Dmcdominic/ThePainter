@@ -14,7 +14,7 @@ public class pocketwatch : MonoBehaviour {
 	// Init
 	private void Awake() {
 		// todo - init this with only last stage unlocked, then unlock more later
-		unlocked = new bool[3] { false, true, true };
+		unlocked = new bool[3] { true, true, true };
 	}
 
 	// Update is called once per frame

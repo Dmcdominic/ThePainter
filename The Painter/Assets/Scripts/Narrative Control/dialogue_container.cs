@@ -11,6 +11,9 @@ public class dialogue_container : MonoBehaviour {
 	public TextMeshProUGUI dialogue_text_obj;
 	public TextMeshProUGUI speaker_text_obj;
 
+	public Image continue_panel;
+	public TextMeshProUGUI continue_text_obj;
+
 	// Fade settings
 	public float panel_fade_time;
 	public float text_fade_delay;
@@ -21,7 +24,14 @@ public class dialogue_container : MonoBehaviour {
 	private bool displaying;
 	private float display_fade_in_timer;
 	private string speaker;
-	
+
+	// Static vars
+	public static float FULL_fade_time;
+	public static bool text_showing;
+	public static bool fully_displayed;
+
+	public static bool waiting_for_input;
+
 
 	// Static instance setup
 	private static dialogue_container Instance;
@@ -41,6 +51,9 @@ public class dialogue_container : MonoBehaviour {
 		set_display(false);
 		dialogue_text_obj.text = "";
 		speaker_text_obj.text = "";
+
+		FULL_fade_time = text_fade_delay * 2 + text_fade_time;
+		waiting_for_input = false;
 	}
 
 	// Each frame, adjust the opacity of the panel and text
@@ -50,7 +63,7 @@ public class dialogue_container : MonoBehaviour {
 		} else {
 			display_fade_in_timer -= Time.deltaTime * fade_out_rate_mult;
 		}
-		display_fade_in_timer = Mathf.Clamp(display_fade_in_timer, 0, text_fade_delay*2 + text_fade_time);
+		display_fade_in_timer = Mathf.Clamp(display_fade_in_timer, 0, FULL_fade_time);
 
 
 		// Panel opacity
@@ -67,6 +80,13 @@ public class dialogue_container : MonoBehaviour {
 		float new_sText_alpha = Mathf.Lerp(0, 1, (display_fade_in_timer - text_fade_delay*2) / text_fade_time);
 		col = speaker_text_obj.color;
 		speaker_text_obj.color = new Color(col.r, col.g, col.b, new_sText_alpha);
+
+		// Update static bools
+		text_showing = new_dText_alpha > 0;
+		fully_displayed = new_sText_alpha == 1;
+
+		// Update the "press any button to continue" bubble
+		continue_panel.gameObject.SetActive(waiting_for_input);
 	}
 
 	// Call this to update the dialogue display
@@ -89,5 +109,52 @@ public class dialogue_container : MonoBehaviour {
 			return "";
 		}
 		return Instance.speaker;
+	}
+
+	// =========== Cutscene management ===========
+	public static void start_cutscene(List<cutscene_bit> cutscene_Bits) {
+		Instance.StartCoroutine(cutscene_sequence(cutscene_Bits));
+	}
+
+	private static IEnumerator cutscene_sequence(List<cutscene_bit> cutscene_Bits) {
+		// Setup
+		movement.set_movement_enabled(false);
+
+		// Iterate over the dialogue list
+		foreach (cutscene_bit bit in cutscene_Bits) {
+			yield return new wait_until_dialogue_hidden();
+			update_text(bit.dialogue, bit.speaker, true);
+			if (bit.cam_focus) {
+				camera_controller.focus = bit.cam_focus.transform;
+			}
+			if (bit.cam_size != 0) {
+				camera_controller.target_size = bit.cam_size;
+			}
+
+			yield return new wait_until_dialogue_ready();
+			waiting_for_input = true;
+			yield return new wait_until_any_input();
+			waiting_for_input = false;
+			update_text(bit.dialogue, bit.speaker, false);
+		}
+
+		// Wrap up before returning
+		camera_controller.focus = movement.player_instance.transform;
+		movement.set_movement_enabled(true);
+	}
+}
+
+// Used to construct a list of dialogue lines and camera movements
+// which make up a single cutscene
+public struct cutscene_bit {
+	public string dialogue;
+	public string speaker;
+	public GameObject cam_focus;
+	public float cam_size;
+	public cutscene_bit(string _dialogue, string _speaker, GameObject _cam_focus, float _cam_size = 0) {
+		dialogue = _dialogue;
+		speaker = _speaker;
+		cam_focus = _cam_focus;
+		cam_size = _cam_size;
 	}
 }
