@@ -25,6 +25,7 @@ public class shelf_control : MonoBehaviour
         if (player != null)
         {
             shelf.SetActive(false);
+            FindObjectOfType<sound_manager>().playShelfMoving();
         }
     }
 }

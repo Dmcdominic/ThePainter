@@ -10,6 +10,10 @@ public class sound_manager : MonoBehaviour
     public AudioSource turpentine_sound;
     public AudioSource galleria;
     public AudioSource putting_out_fire;
+    public AudioSource water_bubbling;
+    public AudioSource shelf_moving;
+    public AudioSource water_sizzling;
+    public AudioSource water_sizzling_short;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +55,26 @@ public class sound_manager : MonoBehaviour
     public void playPuttingOutFire()
     {
         putting_out_fire.Play();
+    }
+
+    public void playWaterBubbling()
+    {
+        water_bubbling.Play();
+    }
+
+    public void playShelfMoving()
+    {
+        shelf_moving.Play();
+    }
+
+    public void playWaterSizzling()
+    {
+        water_sizzling.Play();
+    }
+
+    public void playWaterSizzlingShort()
+    {
+        water_sizzling_short.Play();
     }
 
 }

@@ -9,11 +9,12 @@ public class putting_out_fire : MonoBehaviour
     public fire_control s1;
     public fire_control_2 s2;
     private bool a, b;
+    private bool played;
+    private AudioSource sizzling;
 
     // Start is called before the first frame update
     void Start()
     {
-
 
     }
 
@@ -29,5 +30,16 @@ public class putting_out_fire : MonoBehaviour
             button.SetActive(true);
             FindObjectOfType<sound_manager>().playPuttingOutFire();
         }
+
+        if ((a && !b) || (b && !a))
+        {
+            if (!played)
+            {
+                FindObjectOfType<sound_manager>().playWaterSizzlingShort();
+                played = true;
+            }
+        }
     }
+
+
 }
