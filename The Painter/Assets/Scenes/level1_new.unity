@@ -26455,12 +26455,12 @@ PrefabInstance:
     - target: {fileID: 5100808972530289927, guid: 31b6e578b653d471191e21f3105d99f9,
         type: 3}
       propertyPath: m_PlayOnAwake
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5100808972530289927, guid: 31b6e578b653d471191e21f3105d99f9,
         type: 3}
       propertyPath: Loop
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4932150518321214633, guid: 31b6e578b653d471191e21f3105d99f9,
         type: 3}
