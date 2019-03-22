@@ -1484,7 +1484,7 @@ PrefabInstance:
     - target: {fileID: 8816076585433296429, guid: ee3c8c816ac70c0418baea6add296d1b,
         type: 3}
       propertyPath: thoughts
-      value: Lisa had means when she went to the toolshed and picked up a trowel.
+      value: Lisa had motive because she was previously engaged to John.
       objectReference: {fileID: 0}
     - target: {fileID: 8816076585433296434, guid: ee3c8c816ac70c0418baea6add296d1b,
         type: 3}
@@ -5815,12 +5815,12 @@ PrefabInstance:
     - target: {fileID: 6784882033415835036, guid: e7531dfad349f284eb5fc526f8651f03,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -71.1
+      value: -69.5
       objectReference: {fileID: 0}
     - target: {fileID: 6784882033415835036, guid: e7531dfad349f284eb5fc526f8651f03,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.5
+      value: -1.4
       objectReference: {fileID: 0}
     - target: {fileID: 6784882033415835036, guid: e7531dfad349f284eb5fc526f8651f03,
         type: 3}

@@ -16,7 +16,12 @@ public class boss_final_dialogue : MonoBehaviour {
 	public static bool final_result;
 
 
-	// Initialization [unused]
+	// Init on awake
+	private void Awake() {
+		init();
+	}
+
+	// Initialization
 	private void init() {
 		already_played = false;
 	}
@@ -72,6 +77,6 @@ public class boss_final_dialogue : MonoBehaviour {
 			};
 		}
 
-		dialogue_container.start_cutscene(sequence);
+		dialogue_container.start_cutscene(sequence, true);
 	}
 }
