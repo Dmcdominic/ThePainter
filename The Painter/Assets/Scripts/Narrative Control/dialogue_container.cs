@@ -92,8 +92,13 @@ public class dialogue_container : MonoBehaviour {
 	// Call this to update the dialogue display
 	public static void update_text(string dialogue, string speaker, bool display) {
 		Instance.dialogue_text_obj.text = dialogue;
-		Instance.speaker_text_obj.text = "- " + speaker;
-		Instance.speaker = speaker;
+		if (speaker != null && speaker != "") {
+			Instance.speaker_text_obj.text = "- " + speaker;
+			Instance.speaker = speaker;
+		} else {
+			Instance.speaker_text_obj.text = "";
+			Instance.speaker = "";
+		}
 		Instance.set_display(display);
 	}
 
@@ -140,6 +145,8 @@ public class dialogue_container : MonoBehaviour {
 
 		// Wrap up before returning
 		camera_controller.focus = movement.player_instance.transform;
+		yield return new wait_until_dialogue_hidden();
+		yield return new WaitUntil(() => camera_controller.velo.magnitude < 0.2f);
 		movement.set_movement_enabled(true);
 	}
 }
