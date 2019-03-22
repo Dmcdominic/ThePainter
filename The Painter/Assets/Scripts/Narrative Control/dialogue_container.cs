@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -92,8 +93,13 @@ public class dialogue_container : MonoBehaviour {
 	// Call this to update the dialogue display
 	public static void update_text(string dialogue, string speaker, bool display) {
 		Instance.dialogue_text_obj.text = dialogue;
-		Instance.speaker_text_obj.text = "- " + speaker;
-		Instance.speaker = speaker;
+		if (speaker != null && speaker != "") {
+			Instance.speaker_text_obj.text = "- " + speaker;
+			Instance.speaker = speaker;
+		} else {
+			Instance.speaker_text_obj.text = "";
+			Instance.speaker = "";
+		}
 		Instance.set_display(display);
 	}
 
@@ -112,11 +118,11 @@ public class dialogue_container : MonoBehaviour {
 	}
 
 	// =========== Cutscene management ===========
-	public static void start_cutscene(List<cutscene_bit> cutscene_Bits) {
-		Instance.StartCoroutine(cutscene_sequence(cutscene_Bits));
+	public static void start_cutscene(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false) {
+		Instance.StartCoroutine(cutscene_sequence(cutscene_Bits, fade_to_menu));
 	}
 
-	private static IEnumerator cutscene_sequence(List<cutscene_bit> cutscene_Bits) {
+	private static IEnumerator cutscene_sequence(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false) {
 		// Setup
 		movement.set_movement_enabled(false);
 
@@ -138,8 +144,18 @@ public class dialogue_container : MonoBehaviour {
 			update_text(bit.dialogue, bit.speaker, false);
 		}
 
+		// If we are fading to menu, do so now
+		if (fade_to_menu) {
+			black_overlay.fade_to_black();
+			yield return new WaitForSeconds(black_overlay.total_fade_time + 0.5f);
+			SceneManager.LoadScene(1);
+			yield break;
+		}
+
 		// Wrap up before returning
 		camera_controller.focus = movement.player_instance.transform;
+		yield return new wait_until_dialogue_hidden();
+		yield return new WaitUntil(() => camera_controller.velo.magnitude < 0.2f);
 		movement.set_movement_enabled(true);
 	}
 }
