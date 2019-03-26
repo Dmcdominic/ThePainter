@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b6fa970a0fb714291faf2839b19b7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x_mult: 2
+  x_mult: 2.8
   jump_velo: 6
   falling_grav_mult: 2
   ghost_jump_delay: 0.25
@@ -244,3 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bea6915810f70147a9066eeeebc12c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clara_controller_sketch: {fileID: 9100000, guid: 841f0104c2e6200418f65761ab7cbb8d,
+    type: 2}
+  clara_controller_color: {fileID: 9100000, guid: c82de54e4b9ee5a45803b62347a104ed,
+    type: 2}

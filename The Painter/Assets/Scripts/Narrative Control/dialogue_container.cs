@@ -129,7 +129,7 @@ public class dialogue_container : MonoBehaviour {
 		// Iterate over the dialogue list
 		foreach (cutscene_bit bit in cutscene_Bits) {
 			yield return new wait_until_dialogue_hidden();
-			update_text(bit.dialogue, bit.speaker, true);
+			update_text(bit.dialogue, bit.speaker, !bit.cam_only);
 			if (bit.cam_focus) {
 				camera_controller.focus = bit.cam_focus.transform;
 			}
@@ -167,10 +167,12 @@ public struct cutscene_bit {
 	public string speaker;
 	public GameObject cam_focus;
 	public float cam_size;
-	public cutscene_bit(string _dialogue, string _speaker, GameObject _cam_focus, float _cam_size = 0) {
+	public bool cam_only;
+	public cutscene_bit(string _dialogue, string _speaker, GameObject _cam_focus, float _cam_size = 0, bool _cam_only = false) {
 		dialogue = _dialogue;
 		speaker = _speaker;
 		cam_focus = _cam_focus;
 		cam_size = _cam_size;
+		cam_only = _cam_only;
 	}
 }
