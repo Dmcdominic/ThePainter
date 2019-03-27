@@ -73,10 +73,11 @@ public class boss_final_dialogue : MonoBehaviour {
 			sequence = new List<cutscene_bit> {
 				new cutscene_bit("For some, it's because they have nothing left.", "The Painter", painter_for_cam_focus),
 				new cutscene_bit("I still have much to go on with. But... I just can't do it.", "The Painter", null),
-				new cutscene_bit("Not without him.", "The Painter", null)
+				new cutscene_bit("Not without him.", "The Painter", null),
+				new cutscene_bit("You let me down.", "The Painter", movement.player_instance.gameObject)
 			};
 		}
 
-		dialogue_container.start_cutscene(sequence, true);
+		dialogue_container.start_cutscene(sequence, false, true);
 	}
 }

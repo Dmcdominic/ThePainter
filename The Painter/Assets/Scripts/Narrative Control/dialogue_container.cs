@@ -118,11 +118,11 @@ public class dialogue_container : MonoBehaviour {
 	}
 
 	// =========== Cutscene management ===========
-	public static void start_cutscene(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false) {
-		Instance.StartCoroutine(cutscene_sequence(cutscene_Bits, fade_to_menu));
+	public static void start_cutscene(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false, bool fade_to_credits = false) {
+		Instance.StartCoroutine(cutscene_sequence(cutscene_Bits, fade_to_menu, fade_to_credits));
 	}
 
-	private static IEnumerator cutscene_sequence(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false) {
+	private static IEnumerator cutscene_sequence(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false, bool fade_to_credits = false) {
 		// Setup
 		movement.set_movement_enabled(false);
 
@@ -144,14 +144,19 @@ public class dialogue_container : MonoBehaviour {
 			update_text(bit.dialogue, bit.speaker, false);
 		}
 
-		// If we are fading to menu, do so now
+		// If we are fading to menu or credits, do so now
 		if (fade_to_menu) {
 			black_overlay.fade_to_black();
 			yield return new WaitForSeconds(black_overlay.total_fade_time + 0.5f);
 			SceneManager.LoadScene(1);
 			yield break;
+		} else if (fade_to_credits) {
+			black_overlay.fade_to_black();
+			yield return new WaitForSeconds(black_overlay.total_fade_time + 0.5f);
+			SceneManager.LoadScene("Final Credits");
+			yield break;
 		}
-
+		
 		// Wrap up before returning
 		camera_controller.focus = movement.player_instance.transform;
 		yield return new wait_until_dialogue_hidden();
