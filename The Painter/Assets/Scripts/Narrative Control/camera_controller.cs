@@ -17,7 +17,7 @@ public class camera_controller : MonoBehaviour {
 
 	// Private vars
 	private Camera cam;
-	private Vector2 velo;
+	public static Vector2 velo { get; private set; }
 
 	// The current object for the camera to track
 	public static Transform focus;

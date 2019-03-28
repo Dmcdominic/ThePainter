@@ -69,6 +69,9 @@ public class movement : MonoBehaviour {
 		if (!movement_enabled) {
 			//rb.velocity = Vector3.zero;
 			rb.velocity = new Vector2(0, rb.velocity.y);
+			animator.SetBool("walking", false);
+			animator.SetBool("jumping", rb.velocity.y > 0.1f);
+			animator.SetBool("falling", rb.velocity.y < -0.1f);
 			return;
 		}
 
@@ -113,26 +116,26 @@ public class movement : MonoBehaviour {
 		// Fall through platforms if you are holding down
 		//col.enabled = y_input >= 0;
 
-		// Check if you should be running
-		if (Mathf.Abs(x_input_raw) > 0 && Mathf.Abs(rb.velocity.y) < 0.05f) {
-			//animator.SetBool("running", true);
+		// Check if you should be walking
+		if (Mathf.Abs(x_input_raw) > 0 && Mathf.Abs(rb.velocity.y) < 0.1f) {
+			animator.SetBool("walking", true);
 		} else {
-			//animator.SetBool("running", false);
+			animator.SetBool("walking", false);
 		}
 
 		// Check if you should be jumping
-		if (rb.velocity.y > 0.5f) {
-			//animator.SetBool("jumping", true);
+		if (rb.velocity.y >= 0.1f) {
+			animator.SetBool("jumping", true);
 		} else {
-			//animator.SetBool("jumping", false);
+			animator.SetBool("jumping", false);
 		}
 
 		// Check if you should be falling
 		if (rb.velocity.y < 0) {
 			rb.gravityScale = base_grav_scale * falling_grav_mult;
-			//animator.SetBool("falling", true);
+			animator.SetBool("falling", true);
 		} else {
-			//animator.SetBool("falling", false);
+			animator.SetBool("falling", false);
 			if (y_input_raw > 0) {
 				rb.gravityScale = base_grav_scale;
 			} else {

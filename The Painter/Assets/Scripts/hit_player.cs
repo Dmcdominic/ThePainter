@@ -7,6 +7,7 @@ public class hit_player : MonoBehaviour
 {
     public GameObject reset_position;
     public GameObject player;
+    private int count;
    
 
     // Start is called before the first frame update
@@ -26,9 +27,13 @@ public class hit_player : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
+            count += 1;
 
-            player.transform.position = reset_position.transform.position;
-            //SceneManager.LoadScene((string)SceneManager.GetActiveScene().name);
+            if (count == 6)
+            {
+                player.transform.position = reset_position.transform.position;
+                count = 0;
+            }
         }
     }
 }

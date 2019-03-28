@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -92,8 +93,13 @@ public class dialogue_container : MonoBehaviour {
 	// Call this to update the dialogue display
 	public static void update_text(string dialogue, string speaker, bool display) {
 		Instance.dialogue_text_obj.text = dialogue;
-		Instance.speaker_text_obj.text = "- " + speaker;
-		Instance.speaker = speaker;
+		if (speaker != null && speaker != "") {
+			Instance.speaker_text_obj.text = "- " + speaker;
+			Instance.speaker = speaker;
+		} else {
+			Instance.speaker_text_obj.text = "";
+			Instance.speaker = "";
+		}
 		Instance.set_display(display);
 	}
 
@@ -112,18 +118,18 @@ public class dialogue_container : MonoBehaviour {
 	}
 
 	// =========== Cutscene management ===========
-	public static void start_cutscene(List<cutscene_bit> cutscene_Bits) {
-		Instance.StartCoroutine(cutscene_sequence(cutscene_Bits));
+	public static void start_cutscene(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false) {
+		Instance.StartCoroutine(cutscene_sequence(cutscene_Bits, fade_to_menu));
 	}
 
-	private static IEnumerator cutscene_sequence(List<cutscene_bit> cutscene_Bits) {
+	private static IEnumerator cutscene_sequence(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false) {
 		// Setup
 		movement.set_movement_enabled(false);
 
 		// Iterate over the dialogue list
 		foreach (cutscene_bit bit in cutscene_Bits) {
 			yield return new wait_until_dialogue_hidden();
-			update_text(bit.dialogue, bit.speaker, true);
+			update_text(bit.dialogue, bit.speaker, !bit.cam_only);
 			if (bit.cam_focus) {
 				camera_controller.focus = bit.cam_focus.transform;
 			}
@@ -138,8 +144,18 @@ public class dialogue_container : MonoBehaviour {
 			update_text(bit.dialogue, bit.speaker, false);
 		}
 
+		// If we are fading to menu, do so now
+		if (fade_to_menu) {
+			black_overlay.fade_to_black();
+			yield return new WaitForSeconds(black_overlay.total_fade_time + 0.5f);
+			SceneManager.LoadScene(1);
+			yield break;
+		}
+
 		// Wrap up before returning
 		camera_controller.focus = movement.player_instance.transform;
+		yield return new wait_until_dialogue_hidden();
+		yield return new WaitUntil(() => camera_controller.velo.magnitude < 0.2f);
 		movement.set_movement_enabled(true);
 	}
 }
@@ -151,10 +167,12 @@ public struct cutscene_bit {
 	public string speaker;
 	public GameObject cam_focus;
 	public float cam_size;
-	public cutscene_bit(string _dialogue, string _speaker, GameObject _cam_focus, float _cam_size = 0) {
+	public bool cam_only;
+	public cutscene_bit(string _dialogue, string _speaker, GameObject _cam_focus, float _cam_size = 0, bool _cam_only = false) {
 		dialogue = _dialogue;
 		speaker = _speaker;
 		cam_focus = _cam_focus;
 		cam_size = _cam_size;
+		cam_only = _cam_only;
 	}
 }

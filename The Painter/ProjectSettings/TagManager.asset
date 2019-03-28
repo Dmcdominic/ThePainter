@@ -5,7 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - fire
+<<<<<<< HEAD
   - trigger
+=======
+  - invisible_wall
+>>>>>>> develop
   layers:
   - Default
   - TransparentFX
@@ -19,7 +23,7 @@ TagManager:
   - 
   - platform
   - object
-  - 
+  - invisible_wall
   - 
   - 
   - 
