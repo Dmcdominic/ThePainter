@@ -13,12 +13,9 @@ public class pocketwatch : MonoBehaviour {
 	private bool forward_key_held;
 	private bool back_key_held;
 
-<<<<<<< HEAD
     public GameObject stage2;
     public GameObject stage1;
-=======
 	private Animator animator;
->>>>>>> develop
 
 
 	// Init
@@ -70,7 +67,6 @@ public class pocketwatch : MonoBehaviour {
 		// todo - transition or anything?
 		stage = next_stage;
 
-<<<<<<< HEAD
         if (stage == 2) {
             stage2.gameObject.SetActive(true);
             stage1.gameObject.SetActive(false);
@@ -80,8 +76,7 @@ public class pocketwatch : MonoBehaviour {
         }
 
         print("New stage: " + stage);
-=======
-		// Update animator
+
 		if (stage == 2) {
 			animator.runtimeAnimatorController = clara_controller_color;
 		} else {
@@ -89,6 +84,5 @@ public class pocketwatch : MonoBehaviour {
 		}
 
 		print("New stage: " + stage);
->>>>>>> develop
 	}
 }

@@ -1718,7 +1718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reset_position: {fileID: 842228787}
-  player: {fileID: 0}
+  player: {fileID: 620352427}
 --- !u!198 &767289066
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -6445,7 +6445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reset_position: {fileID: 842228787}
-  player: {fileID: 0}
+  player: {fileID: 620352427}
 --- !u!198 &781014434
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -14033,7 +14033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reset_position: {fileID: 842228787}
-  player: {fileID: 0}
+  player: {fileID: 620352427}
 --- !u!198 &1820266581
 ParticleSystem:
   m_ObjectHideFlags: 0

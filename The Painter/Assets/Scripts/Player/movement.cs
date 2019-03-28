@@ -63,7 +63,7 @@ public class movement : MonoBehaviour {
 
 	// Called once per frame
 	void FixedUpdate() {
-		// Reset the current_scene
+        // Reset the current_scene
 		current_scene = SceneManager.GetActiveScene().buildIndex;
 
 		if (!movement_enabled) {
@@ -80,8 +80,8 @@ public class movement : MonoBehaviour {
 		float x_input_raw = Input.GetAxisRaw(horizontal_axis);
 		float y_input_raw = Input.GetAxisRaw(vertical_axis);
 
-		// Horizontal movement
-		transform.Translate(Mathf.Abs(x_input) * (-1f) * x_mult * Time.deltaTime, 0, 0);
+        // Horizontal movement
+        transform.Translate(Mathf.Abs(x_input) * (-1f) * x_mult * Time.deltaTime, 0, 0);
 		//rb.velocity += new Vector2(x_input * x_mult * Time.deltaTime, 0);
 
 		// Jump controls
@@ -93,17 +93,36 @@ public class movement : MonoBehaviour {
 			raycast = Physics2D.Raycast(right_foot_pos, Vector2.down, raycast_dist, landing_layer_mask);
 		}
 
+        print("raycast: " + raycast);
+        print("");
+        print("raycast collider: " + raycast.collider);
+        print("");
+        print("raycast collider: " + raycast.collider == null);
+        print("");
+        print("y velocity: " + rb.velocity.y);
+        print("");
+        print("grounded delay: " + jump_grounded_delay);
+        print("");
+        print("grounded check: " + jump_grounded_check);
+        print("");
+        print("jump held: " + !jump_held);
+
 		if (raycast.collider != null && rb.velocity.y <= 0) {
+            print("going up");
 			jump_grounded_check = true;
-			jump_grounded_delay = ghost_jump_delay;
+            print("grounded check: " + jump_grounded_check);
+            jump_grounded_delay = ghost_jump_delay;
 		} else if (jump_grounded_delay <= 0 || rb.velocity.y > jump_velo * 0.2) {
 			jump_grounded_check = false;
 			jump_grounded_delay = 0;
 		} else {
+            print("going down");
 			jump_grounded_delay -= Time.deltaTime;
 		}
 		
 		if (jump_grounded_check && y_input_raw > 0 && !jump_held) {
+            print("y input: " + y_input_raw);
+            print("calling jump");
 			jump();
 		}
 
@@ -160,6 +179,7 @@ public class movement : MonoBehaviour {
 
 	// Jump!
 	private void jump() {
+        print("jumping");
 		rb.velocity = new Vector2(rb.velocity.x, jump_velo);
 		//SoundManager.instance.playJump();
 		// todo - jump sound
