@@ -12,6 +12,7 @@ public class painter : MonoBehaviour {
 
 	private List<paintable> touching_paintables;
 	private List<erasable> touching_erasables;
+    private List<paintable> touching_triggers;
 
 
 	// Init
@@ -23,6 +24,7 @@ public class painter : MonoBehaviour {
 	private void Start() {
 		touching_paintables = new List<paintable>();
 		touching_erasables = new List<erasable>();
+        touching_triggers = new List<paintable>();
 	}
 
 	// Update is called once per frame

@@ -11,21 +11,22 @@ public class paintable : MonoBehaviour {
 
 	// Private vars
 	private bool show_indicator = false;
+    private Vector2 vector;
 
 	// Static settings
 	public static float indicator_fade_time = 0.4f;
-
+    
 
 	// Init the indicator as hidden
 	private void Start() {
 		set_indicator_alpha(0);
-	}
+    }
 
 	// Regularly adjust the opacity of the indicator
 	private void Update() {
 		float alpha_incr = (show_indicator ? 1f : -1f) / indicator_fade_time * Time.deltaTime;
 		adjust_indicator_alpha(alpha_incr);
-	}
+    }
 
 	// Call this to paint in all the corresponding objects
 	public void paint_in() {
@@ -35,7 +36,7 @@ public class paintable : MonoBehaviour {
                 FindObjectOfType<sound_manager>().playPaintingSound();
 			}
 		}
-	}
+    }
 
 	// Show paintable indicator when touching player
 	private void OnTriggerEnter2D(Collider2D collision) {

@@ -10,6 +10,9 @@ public class pocketwatch : MonoBehaviour {
 	private bool forward_key_held;
 	private bool back_key_held;
 
+    public GameObject stage2;
+    public GameObject stage1;
+
 
 	// Init
 	private void Awake() {
@@ -36,7 +39,7 @@ public class pocketwatch : MonoBehaviour {
 
 	// Swap to the the next, or previous, stage (if possible)
 	private void shift_stage(bool forward) {
-		int next_stage = 0;
+		int next_stage = 2;
 		if (forward) {
 			next_stage = stage + 1;
 		} else {
@@ -51,6 +54,14 @@ public class pocketwatch : MonoBehaviour {
 		// todo - transition or anything?
 		stage = next_stage;
 
-		print("New stage: " + stage);
+        if (stage == 2) {
+            stage2.gameObject.SetActive(true);
+            stage1.gameObject.SetActive(false);
+        } else if (stage == 1) {
+            stage1.gameObject.SetActive(true);
+            stage2.gameObject.SetActive(false);
+        }
+
+        print("New stage: " + stage);
 	}
 }
