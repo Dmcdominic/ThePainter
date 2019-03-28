@@ -109,12 +109,18 @@ public class dialogue_container : MonoBehaviour {
 		//panel.gameObject.SetActive(display);
 	}
 
-	// Check the current speaker
+	// Check the current speaker or dialogue
 	public static string get_current_speaker() {
 		if (!Instance.displaying) {
 			return "";
 		}
 		return Instance.speaker;
+	}
+	public static string get_current_dialogue() {
+		//if (!Instance.displaying) {
+		//	return "";
+		//}
+		return Instance.dialogue_text_obj.text;
 	}
 
 	// =========== Cutscene management ===========
