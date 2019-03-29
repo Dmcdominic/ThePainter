@@ -22,7 +22,7 @@ public class final_credits : MonoBehaviour {
 	// Start is called before the first frame update
 	void Start() {
 		// TESTING!
-		//boss_final_dialogue.final_result = true;
+		boss_final_dialogue.final_result = true;
 
 		good_ending.SetActive(boss_final_dialogue.final_result);
 		bad_ending.SetActive(!boss_final_dialogue.final_result);
@@ -42,6 +42,5 @@ public class final_credits : MonoBehaviour {
 			cam_current_delta = Mathf.Clamp(cam_current_delta, 0f, cam_size_delta);
 		}
 		Camera.main.orthographicSize += cam_current_delta * Time.deltaTime;
-		print(cam_current_delta);
 	}
 }
