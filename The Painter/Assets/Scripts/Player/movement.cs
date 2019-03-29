@@ -69,6 +69,9 @@ public class movement : MonoBehaviour {
 		if (!movement_enabled) {
 			//rb.velocity = Vector3.zero;
 			rb.velocity = new Vector2(0, rb.velocity.y);
+			animator.SetBool("walking", false);
+			animator.SetBool("jumping", rb.velocity.y > 0.1f);
+			animator.SetBool("falling", rb.velocity.y < -0.1f);
 			return;
 		}
 

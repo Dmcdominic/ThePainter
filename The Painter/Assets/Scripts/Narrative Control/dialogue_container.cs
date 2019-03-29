@@ -109,27 +109,33 @@ public class dialogue_container : MonoBehaviour {
 		//panel.gameObject.SetActive(display);
 	}
 
-	// Check the current speaker
+	// Check the current speaker or dialogue
 	public static string get_current_speaker() {
 		if (!Instance.displaying) {
 			return "";
 		}
 		return Instance.speaker;
 	}
-
-	// =========== Cutscene management ===========
-	public static void start_cutscene(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false) {
-		Instance.StartCoroutine(cutscene_sequence(cutscene_Bits, fade_to_menu));
+	public static string get_current_dialogue() {
+		//if (!Instance.displaying) {
+		//	return "";
+		//}
+		return Instance.dialogue_text_obj.text;
 	}
 
-	private static IEnumerator cutscene_sequence(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false) {
+	// =========== Cutscene management ===========
+	public static void start_cutscene(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false, bool fade_to_credits = false) {
+		Instance.StartCoroutine(cutscene_sequence(cutscene_Bits, fade_to_menu, fade_to_credits));
+	}
+
+	private static IEnumerator cutscene_sequence(List<cutscene_bit> cutscene_Bits, bool fade_to_menu = false, bool fade_to_credits = false) {
 		// Setup
 		movement.set_movement_enabled(false);
 
 		// Iterate over the dialogue list
 		foreach (cutscene_bit bit in cutscene_Bits) {
 			yield return new wait_until_dialogue_hidden();
-			update_text(bit.dialogue, bit.speaker, true);
+			update_text(bit.dialogue, bit.speaker, !bit.cam_only);
 			if (bit.cam_focus) {
 				camera_controller.focus = bit.cam_focus.transform;
 			}
@@ -144,14 +150,19 @@ public class dialogue_container : MonoBehaviour {
 			update_text(bit.dialogue, bit.speaker, false);
 		}
 
-		// If we are fading to menu, do so now
+		// If we are fading to menu or credits, do so now
 		if (fade_to_menu) {
 			black_overlay.fade_to_black();
 			yield return new WaitForSeconds(black_overlay.total_fade_time + 0.5f);
 			SceneManager.LoadScene(1);
 			yield break;
+		} else if (fade_to_credits) {
+			black_overlay.fade_to_black();
+			yield return new WaitForSeconds(black_overlay.total_fade_time + 0.5f);
+			SceneManager.LoadScene("Final Credits");
+			yield break;
 		}
-
+		
 		// Wrap up before returning
 		camera_controller.focus = movement.player_instance.transform;
 		yield return new wait_until_dialogue_hidden();
@@ -167,10 +178,12 @@ public struct cutscene_bit {
 	public string speaker;
 	public GameObject cam_focus;
 	public float cam_size;
-	public cutscene_bit(string _dialogue, string _speaker, GameObject _cam_focus, float _cam_size = 0) {
+	public bool cam_only;
+	public cutscene_bit(string _dialogue, string _speaker, GameObject _cam_focus, float _cam_size = 0, bool _cam_only = false) {
 		dialogue = _dialogue;
 		speaker = _speaker;
 		cam_focus = _cam_focus;
 		cam_size = _cam_size;
+		cam_only = _cam_only;
 	}
 }

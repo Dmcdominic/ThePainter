@@ -7,8 +7,13 @@ public class pocketwatch : MonoBehaviour {
 	public static bool[] unlocked;
 	public static int stage = 2;
 
+	public RuntimeAnimatorController clara_controller_sketch;
+	public RuntimeAnimatorController clara_controller_color;
+
 	private bool forward_key_held;
 	private bool back_key_held;
+
+	private Animator animator;
 
 
 	// Init
@@ -16,6 +21,14 @@ public class pocketwatch : MonoBehaviour {
 		// todo - init this with only last stage unlocked, then unlock the second one later
 		// NO LONGER USING STAGE 0. ONLY STAGES 2 (full color) AND 1 (sketch)
 		unlocked = new bool[3] { false, true, true };
+
+		// Animator initialization
+		animator = GetComponent<Animator>();
+		if (stage == 2) {
+			animator.runtimeAnimatorController = clara_controller_color;
+		} else {
+			animator.runtimeAnimatorController = clara_controller_sketch;
+		}
 	}
 
 	// Update is called once per frame
@@ -51,6 +64,13 @@ public class pocketwatch : MonoBehaviour {
 
 		// todo - transition or anything?
 		stage = next_stage;
+
+		// Update animator
+		if (stage == 2) {
+			animator.runtimeAnimatorController = clara_controller_color;
+		} else {
+			animator.runtimeAnimatorController = clara_controller_sketch;
+		}
 
 		print("New stage: " + stage);
 	}
