@@ -1089,16 +1089,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3231601786824394944, guid: ae70f548b81409342b552b08d584e020,
-        type: 3}
-      propertyPath: m_Name
-      value: Erasable_spot
-      objectReference: {fileID: 0}
-    - target: {fileID: 3231601786824394944, guid: ae70f548b81409342b552b08d584e020,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3231601786824394973, guid: ae70f548b81409342b552b08d584e020,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1152,6 +1142,16 @@ PrefabInstance:
     - target: {fileID: 3231601786824394973, guid: ae70f548b81409342b552b08d584e020,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231601786824394944, guid: ae70f548b81409342b552b08d584e020,
+        type: 3}
+      propertyPath: m_Name
+      value: Erasable_spot
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231601786824394944, guid: ae70f548b81409342b552b08d584e020,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3231601786824394946, guid: ae70f548b81409342b552b08d584e020,
@@ -1481,11 +1481,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 254641839}
     m_Modifications:
-    - target: {fileID: 3231601786824394944, guid: ae70f548b81409342b552b08d584e020,
-        type: 3}
-      propertyPath: m_Name
-      value: Erasable_spot
-      objectReference: {fileID: 0}
     - target: {fileID: 3231601786824394973, guid: ae70f548b81409342b552b08d584e020,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1540,6 +1535,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3231601786824394944, guid: ae70f548b81409342b552b08d584e020,
+        type: 3}
+      propertyPath: m_Name
+      value: Erasable_spot
       objectReference: {fileID: 0}
     - target: {fileID: 3231601786824394946, guid: ae70f548b81409342b552b08d584e020,
         type: 3}
@@ -9159,17 +9159,17 @@ PrefabInstance:
     - target: {fileID: 6385815925275448551, guid: 801a776540b20584e8d8afd76a118176,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6385815925275448571, guid: 801a776540b20584e8d8afd76a118176,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 47.24
+      value: 50.19
       objectReference: {fileID: 0}
     - target: {fileID: 6385815925275448571, guid: 801a776540b20584e8d8afd76a118176,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.55
+      value: 13.41
       objectReference: {fileID: 0}
     - target: {fileID: 6385815925275448571, guid: 801a776540b20584e8d8afd76a118176,
         type: 3}
@@ -9214,6 +9214,16 @@ PrefabInstance:
     - target: {fileID: 6385815925275448571, guid: 801a776540b20584e8d8afd76a118176,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385815925275448570, guid: 801a776540b20584e8d8afd76a118176,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6385815925275448570, guid: 801a776540b20584e8d8afd76a118176,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -27339,6 +27349,11 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6385815925275448549, guid: 801a776540b20584e8d8afd76a118176,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6385815925275448548, guid: 801a776540b20584e8d8afd76a118176,
         type: 3}
       propertyPath: npc_name
@@ -27349,11 +27364,6 @@ PrefabInstance:
       propertyPath: thoughts
       value: Hey how's it going? My name's Steve. Btw, don't touch that waterfall
         over there, it'll really fu... I mean, it'll really mess you up.
-      objectReference: {fileID: 0}
-    - target: {fileID: 6385815925275448549, guid: 801a776540b20584e8d8afd76a118176,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 801a776540b20584e8d8afd76a118176, type: 3}
