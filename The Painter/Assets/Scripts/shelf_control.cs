@@ -5,11 +5,16 @@ using UnityEngine;
 public class shelf_control : MonoBehaviour
 {
     public GameObject shelf;
+    public GameObject shading;
+    public GameObject npc;
+
+    private bool moved;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        moved = false;
         
     }
 
@@ -25,7 +30,14 @@ public class shelf_control : MonoBehaviour
         if (player != null)
         {
             shelf.SetActive(false);
-            FindObjectOfType<sound_manager>().playShelfMoving();
+            shading.SetActive(false);
+            npc.SetActive(true);
+            if (!moved)
+            {
+                FindObjectOfType<sound_manager>().playShelfMoving();
+                moved = true;
+            }
+
         }
     }
 }
